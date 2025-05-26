@@ -1,4 +1,4 @@
-## MabiInfoProject
+# MabiInfoProject
 마비노기 모바일 정보 사이트
 
 # 🛠️ Git Workflow & Commit Convention Guide
