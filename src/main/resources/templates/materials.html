@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/default :: head('제작 재료')}"></head>
+<body>
+    <div th:replace="~{layout/default :: layout(~{::section})}">
+        <section class="page-header">
+            <h1>제작 재료</h1>
+            <p>게임 내 모든 제작 재료와 획득처를 확인하세요.</p>
+        </section>
+
+        <section class="materials-section">
+            <div class="materials-filters">
+                <div class="filter-group">
+                    <label for="category-filter">카테고리</label>
+                    <select id="category-filter">
+                        <option value="all">전체</option>
+                        <option value="ore">광석</option>
+                        <option value="herb">약초</option>
+                        <option value="wood">목재</option>
+                        <option value="leather">가죽</option>
+                        <option value="cloth">천</option>
+                        <option value="gem">보석</option>
+                        <option value="misc">기타</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="rarity-filter">희귀도</label>
+                    <select id="rarity-filter">
+                        <option value="all">전체</option>
+                        <option value="common">일반</option>
+                        <option value="uncommon">고급</option>
+                        <option value="rare">희귀</option>
+                        <option value="epic">영웅</option>
+                        <option value="legendary">전설</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="level-filter">레벨</label>
+                    <select id="level-filter">
+                        <option value="all">전체</option>
+                        <option value="1-10">1-10</option>
+                        <option value="11-20">11-20</option>
+                        <option value="21-30">21-30</option>
+                        <option value="31-40">31-40</option>
+                        <option value="41-50">41-50</option>
+                    </select>
+                </div>
+                <button class="filter-reset">
+                    <i class="fas fa-sync-alt"></i> 초기화
+                </button>
+            </div>
+
+            <div class="materials-search">
+                <input type="text" placeholder="재료 검색" class="materials-search-input">
+                <button class="materials-search-button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+
+            <div class="materials-grid">
+                <div class="material-card">
+                    <div class="material-card-header">
+                        <img src="https://via.placeholder.com/100" alt="Material Image">
+                        <div class="material-info">
+                            <h3>강철 광석</h3>
+                            <span class="material-rarity rare">희귀</span>
+                        </div>
+                    </div>
+                    <div class="material-card-body">
+                        <p class="material-description">
+                            고품질의 강철 광석입니다. 무기와 방어구 제작에 사용됩니다.
+                        </p>
+                        <div class="material-stats">
+                            <div class="stat">
+                                <span class="stat-label">카테고리:</span>
+                                <span class="stat-value">광석</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">레벨:</span>
+                                <span class="stat-value">30</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">무게:</span>
+                                <span class="stat-value">0.5</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">판매가:</span>
+                                <span class="stat-value">250</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="material-card-footer">
+                        <button class="add-to-cart">
+                            <i class="fas fa-cart-plus"></i> 장바구니에 추가
+                        </button>
+                        <button class="view-locations">
+                            <i class="fas fa-map-marker-alt"></i> 획득처 확인
+                        </button>
+                    </div>
+                </div>
+
+                <div class="material-card">
+                    <div class="material-card-header">
+                        <img src="https://via.placeholder.com/100" alt="Material Image">
+                        <div class="material-info">
+                            <h3>마법의 가루</h3>
+                            <span class="material-rarity epic">영웅</span>
+                        </div>
+                    </div>
+                    <div class="material-card-body">
+                        <p class="material-description">
+                            마법의 힘이 담긴 가루입니다. 마법 아이템 제작에 필수적입니다.
+                        </p>
+                        <div class="material-stats">
+                            <div class="stat">
+                                <span class="stat-label">카테고리:</span>
+                                <span class="stat-value">기타</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">레벨:</span>
+                                <span class="stat-value">40</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">무게:</span>
+                                <span class="stat-value">0.1</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">판매가:</span>
+                                <span class="stat-value">500</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="material-card-footer">
+                        <button class="add-to-cart">
+                            <i class="fas fa-cart-plus"></i> 장바구니에 추가
+                        </button>
+                        <button class="view-locations">
+                            <i class="fas fa-map-marker-alt"></i> 획득처 확인
+                        </button>
+                    </div>
+                </div>
+
+                <div class="material-card">
+                    <div class="material-card-header">
+                        <img src="https://via.placeholder.com/100" alt="Material Image">
+                        <div class="material-info">
+                            <h3>단단한 가죽</h3>
+                            <span class="material-rarity uncommon">고급</span>
+                        </div>
+                    </div>
+                    <div class="material-card-body">
+                        <p class="material-description">
+                            내구성이 좋은 가죽입니다. 방어구와 가방 제작에 사용됩니다.
+                        </p>
+                        <div class="material-stats">
+                            <div class="stat">
+                                <span class="stat-label">카테고리:</span>
+                                <span class="stat-value">가죽</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">레벨:</span>
+                                <span class="stat-value">25</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">무게:</span>
+                                <span class="stat-value">0.3</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">판매가:</span>
+                                <span class="stat-value">150</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="material-card-footer">
+                        <button class="add-to-cart">
+                            <i class="fas fa-cart-plus"></i> 장바구니에 추가
+                        </button>
+                        <button class="view-locations">
+                            <i class="fas fa-map-marker-alt"></i> 획득처 확인
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pagination">
+                <button class="pagination-prev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="pagination-numbers">
+                    <button class="active">1</button>
+                    <button>2</button>
+                    <button>3</button>
+                    <button>4</button>
+                    <button>5</button>
+                </div>
+                <button class="pagination-next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <section class="cart-section">
+            <div class="section-header">
+                <h2>장바구니</h2>
+                <button class="toggle-cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </button>
+            </div>
+            <div class="cart-container" style="display: none;">
+                <div class="cart-items">
+                    <!-- Cart items will be added here dynamically -->
+                </div>
+                <div class="cart-actions">
+                    <button class="clear-cart">비우기</button>
+                    <button class="view-all-locations">모든 획득처 확인</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script th:src="@{/js/materials.js}"></script>
+</body>
+</html>

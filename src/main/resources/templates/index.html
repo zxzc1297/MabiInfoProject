@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/default :: head('홈')}"></head>
+<body>
+    <div th:replace="~{layout/default :: layout(~{::section})}">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>MABIMOBILE.INFO</h1>
+                <p>마비노기 모바일 정보 사이트</p>
+                <div class="search-container">
+                    <input type="text" placeholder="캐릭터 검색" class="search-input">
+                    <button class="search-button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <div class="search-stats">
+                    <p>등록된 캐릭터: <span>3,697,470</span> | 오늘 검색: <span>586,435</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Section -->
+        <section class="featured-section">
+            <div class="section-header">
+                <h2>실시간 인기 검색 캐릭터</h2>
+                <div class="section-controls">
+                    <button class="refresh-button">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                    <button class="info-button">
+                        <i class="fas fa-info-circle"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="character-list">
+                <div class="character-item">
+                    <div class="rank">1</div>
+                    <div class="level">15</div>
+                    <div class="character-info">
+                        <img src="https://via.placeholder.com/30" alt="Character Avatar">
+                        <div class="character-name">팔라딘캐릭터</div>
+                    </div>
+                    <div class="character-score">1640.0</div>
+                </div>
+                <div class="character-item">
+                    <div class="rank">2</div>
+                    <div class="level">14</div>
+                    <div class="character-info">
+                        <img src="https://via.placeholder.com/30" alt="Character Avatar">
+                        <div class="character-name">워리어</div>
+                    </div>
+                    <div class="character-score">1700.0</div>
+                </div>
+                <div class="character-item">
+                    <div class="rank">3</div>
+                    <div class="level">12</div>
+                    <div class="character-info">
+                        <img src="https://via.placeholder.com/30" alt="Character Avatar">
+                        <div class="character-name">메이지</div>
+                    </div>
+                    <div class="character-score">1680.0</div>
+                </div>
+                <div class="character-item">
+                    <div class="rank">4</div>
+                    <div class="level">12</div>
+                    <div class="character-info">
+                        <img src="https://via.placeholder.com/30" alt="Character Avatar">
+                        <div class="character-name">최강의나검</div>
+                    </div>
+                    <div class="character-score">1680.0</div>
+                </div>
+                <div class="character-item">
+                    <div class="rank">5</div>
+                    <div class="level">12</div>
+                    <div class="character-info">
+                        <img src="https://via.placeholder.com/30" alt="Character Avatar">
+                        <div class="character-name">헌터</div>
+                    </div>
+                    <div class="character-score">1720.0</div>
+                </div>
+            </div>
+            <div class="view-more">
+                <button>더보기</button>
+            </div>
+        </section>
+
+        <!-- Materials Section -->
+        <section class="materials-section">
+            <div class="section-header">
+                <h2>제작 재료 장바구니</h2>
+            </div>
+            <div class="materials-container">
+                <div class="materials-search">
+                    <input type="text" placeholder="재료 검색" class="materials-search-input">
+                    <button class="materials-search-button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <div class="materials-list">
+                    <div class="material-item">
+                        <div class="material-info">
+                            <img src="https://via.placeholder.com/40" alt="Material Image">
+                            <div class="material-name">강철 광석</div>
+                        </div>
+                        <div class="material-quantity">
+                            <button class="quantity-decrease">-</button>
+                            <input type="number" value="1" min="1" max="999">
+                            <button class="quantity-increase">+</button>
+                        </div>
+                        <div class="material-actions">
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i>
+                            </button>
+                            <button class="view-details">
+                                <i class="fas fa-info-circle"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="material-item">
+                        <div class="material-info">
+                            <img src="https://via.placeholder.com/40" alt="Material Image">
+                            <div class="material-name">마법의 가루</div>
+                        </div>
+                        <div class="material-quantity">
+                            <button class="quantity-decrease">-</button>
+                            <input type="number" value="1" min="1" max="999">
+                            <button class="quantity-increase">+</button>
+                        </div>
+                        <div class="material-actions">
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i>
+                            </button>
+                            <button class="view-details">
+                                <i class="fas fa-info-circle"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="material-item">
+                        <div class="material-info">
+                            <img src="https://via.placeholder.com/40" alt="Material Image">
+                            <div class="material-name">단단한 가죽</div>
+                        </div>
+                        <div class="material-quantity">
+                            <button class="quantity-decrease">-</button>
+                            <input type="number" value="1" min="1" max="999">
+                            <button class="quantity-increase">+</button>
+                        </div>
+                        <div class="material-actions">
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i>
+                            </button>
+                            <button class="view-details">
+                                <i class="fas fa-info-circle"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="cart-summary">
+                    <h3>장바구니 요약</h3>
+                    <div class="cart-items">
+                        <div class="cart-item">
+                            <span class="item-name">강철 광석</span>
+                            <span class="item-quantity">x2</span>
+                        </div>
+                        <div class="cart-item">
+                            <span class="item-name">마법의 가루</span>
+                            <span class="item-quantity">x3</span>
+                        </div>
+                    </div>
+                    <div class="cart-actions">
+                        <button class="clear-cart">비우기</button>
+                        <button class="view-locations">획득처 확인</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- News Section -->
+        <section class="news-section">
+            <div class="section-header">
+                <h2>게임 소식</h2>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-date">2023-05-20</div>
+                    <div class="news-title">5월 21일(수) 업데이트 내역 안내</div>
+                </div>
+                <div class="news-item">
+                    <div class="news-date">2023-05-18</div>
+                    <div class="news-title">임시 점검 안내 (5/21 수정)</div>
+                </div>
+                <div class="news-item">
+                    <div class="news-date">2023-05-15</div>
+                    <div class="news-title">5월 정기 점검 안내</div>
+                </div>
+                <div class="news-item">
+                    <div class="news-date">2023-05-10</div>
+                    <div class="news-title">2023년 5월 20일(화) 마비노기 모바일 라이브 방송 시간 안내</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Runes Section Preview -->
+        <section class="runes-section">
+            <div class="section-header">
+                <h2>룬 시스템</h2>
+            </div>
+            <div class="runes-preview">
+                <p>게임 내 모든 룬과 효과를 확인하세요. 룬은 캐릭터의 능력을 강화하는 특별한 아이템입니다.</p>
+                <div class="rune-categories">
+                    <div class="rune-category">
+                        <h3>공격 룬</h3>
+                        <p>캐릭터의 공격력과 관련된 능력을 강화합니다.</p>
+                    </div>
+                    <div class="rune-category">
+                        <h3>방어 룬</h3>
+                        <p>캐릭터의 방어력과 생존력을 향상시킵니다.</p>
+                    </div>
+                    <div class="rune-category">
+                        <h3>유틸리티 룬</h3>
+                        <p>이동 속도, 쿨다운 감소 등 다양한 유틸리티 효과를 제공합니다.</p>
+                    </div>
+                </div>
+                <div class="view-more">
+                    <a th:href="@{/runes}" class="button">룬 목록 보기</a>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <!-- Footer Fragment -->
+    <footer th:fragment="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <a href="/">MABIMOBILE.INFO</a>
+            </div>
+            <div class="footer-links">
+                <ul>
+                    <li><a th:href="@{/about}">소개</a></li>
+                    <li><a th:href="@{/terms}">이용약관</a></li>
+                    <li><a th:href="@{/privacy}">개인정보처리방침</a></li>
+                    <li><a th:href="@{/contact}">문의하기</a></li>
+                </ul>
+            </div>
+            <div class="footer-tech">
+                <p>Frontend - HTML / CSS / JavaScript</p>
+                <p>Server - Java / Spring Boot</p>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}">2023</span> MABIMOBILE.INFO. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
