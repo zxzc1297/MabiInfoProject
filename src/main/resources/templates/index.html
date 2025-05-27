@@ -179,24 +179,47 @@
         <!-- News Section -->
         <section class="news-section">
             <div class="section-header">
-                <h2>게임 소식</h2>
+                <h2>공지사항</h2>
             </div>
-            <div class="news-list">
+            <div class="news-list" th:each="notice : ${noticeList}">
                 <div class="news-item">
-                    <div class="news-date">2023-05-20</div>
-                    <div class="news-title">5월 21일(수) 업데이트 내역 안내</div>
+                    <div class="news-date" th:text="${notice['date']}"></div>
+                    <div class="news-title">
+                        <a th:href="${notice['link']}" th:text="${notice['title']}" target="_blank"></a>
+                    </div>
+
                 </div>
+            </div>
+        </section>
+
+        <!-- 업데이트 -->
+        <section class="news-section">
+            <div class="section-header">
+                <h2>업데이트</h2>
+            </div>
+            <div class="news-list" th:each="update : ${updateList}">
                 <div class="news-item">
-                    <div class="news-date">2023-05-18</div>
-                    <div class="news-title">임시 점검 안내 (5/21 수정)</div>
+                    <div class="news-date" th:text="${update['date']}"></div>
+                    <div class="news-title">
+                        <a th:href="${update['link']}" th:text="${update['title']}" target="_blank"></a>
+                    </div>
+
                 </div>
+            </div>
+        </section>
+
+        <!-- 개발자 노트 -->
+        <section class="news-section">
+            <div class="section-header">
+                <h2>에렌 노트</h2>
+            </div>
+            <div class="news-list" th:each="devNote : ${devNoteList}">
                 <div class="news-item">
-                    <div class="news-date">2023-05-15</div>
-                    <div class="news-title">5월 정기 점검 안내</div>
-                </div>
-                <div class="news-item">
-                    <div class="news-date">2023-05-10</div>
-                    <div class="news-title">2023년 5월 20일(화) 마비노기 모바일 라이브 방송 시간 안내</div>
+                    <div class="news-date" th:text="${devNote['date']}"></div>
+                    <div class="news-title">
+                        <a th:href="${devNote['link']}" th:text="${devNote['title']}" target="_blank"></a>
+                    </div>
+
                 </div>
             </div>
         </section>
