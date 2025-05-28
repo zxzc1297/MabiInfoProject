@@ -29,16 +29,19 @@ public class MainController {
         model.addAttribute("noticeList", noticeList);
         model.addAttribute("devNoteList", devNoteList);
         model.addAttribute("updateList", updateList);
+        model.addAttribute("currentPage", "main");
         return "index";
     }
 
     @GetMapping("/runes")
     public String goRuneList(Model model, HttpServletRequest request){
+        model.addAttribute("currentPage", "runes");
         return "runes";
     }
 
     @GetMapping("/materials")
     public String goMaterialList(Model model, HttpServletRequest request){
+        model.addAttribute("currentPage", "materials");
         return "materials";
     }
 

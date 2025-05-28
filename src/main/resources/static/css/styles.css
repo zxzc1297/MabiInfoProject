@@ -124,7 +124,8 @@ header {
   font-size: 1.2rem;
 }
 
-.dark-light {
+.dark-light,
+.theme-toggle {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -139,7 +140,8 @@ header {
   border: 1px solid var(--border-color);
 }
 
-.dark-light:hover {
+.dark-light:hover,
+.theme-toggle:hover {
   background-color: var(--accent-color);
   color: var(--bg-color);
   transform: scale(1.1);
@@ -575,64 +577,6 @@ footer {
   font-size: 0.8rem;
 }
 
-/* Responsive Styles */
-@media (max-width: 768px) {
-  .main-nav {
-    display: none;
-  }
-
-  .mobile-menu-toggle {
-    display: block;
-  }
-
-  .hero-content h1 {
-    font-size: 2rem;
-  }
-
-  .materials-list {
-    grid-template-columns: 1fr;
-  }
-
-  .footer-links ul {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .rune-categories {
-    flex-direction: column;
-  }
-}
-
-@media (max-width: 480px) {
-  .character-item {
-    flex-wrap: wrap;
-  }
-
-  .material-item {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .material-info {
-    margin-bottom: 10px;
-  }
-
-  .material-quantity,
-  .material-actions {
-    width: 100%;
-    justify-content: space-between;
-    margin: 5px 0;
-  }
-
-  .news-item {
-    flex-direction: column;
-  }
-
-  .news-date {
-    margin-bottom: 5px;
-  }
-}
-
 /* 히어로 섹션 배경 수정 */
 body.light-theme .hero {
   background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
@@ -650,7 +594,8 @@ body.light-theme .rune-category {
 }
 
 /* 라이트 모드에서 테마 토글 버튼 색상 수정 */
-body.light-theme .dark-light {
+body.light-theme .dark-light,
+body.light-theme .theme-toggle {
   background-color: #f0f0f0;
   color: #ff6600;
   border: 1px solid #dddddd;
@@ -704,4 +649,721 @@ body.light-theme footer {
 /* 라이트 모드에서 로고 색상 강화 */
 body.light-theme .logo a {
   color: #e65c00;
+}
+
+/* ===== 새로 추가된 Materials Page 스타일 ===== */
+
+/* Filter Section */
+.filter-section {
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+  transition: background-color 0.3s ease;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 테이블 형태의 분류 필터 */
+.category-filters {
+  margin-top: 20px;
+}
+
+.filter-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--bg-secondary);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.filter-row {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.filter-row:last-child {
+  border-bottom: none;
+}
+
+.filter-label {
+  width: 120px;
+  padding: 15px 20px;
+  background-color: var(--bg-tertiary);
+  font-weight: bold;
+  color: var(--text-primary);
+  border-right: 1px solid var(--border-color);
+  vertical-align: middle;
+  text-align: center;
+}
+
+.filter-options {
+  padding: 10px 15px;
+  background-color: var(--card-bg);
+}
+
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filter-btn {
+  padding: 8px 16px;
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  min-width: 70px;
+  text-align: center;
+}
+
+.filter-btn:hover {
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+  border-color: var(--accent-color);
+}
+
+.filter-btn.active {
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+  border-color: var(--accent-color);
+  font-weight: bold;
+}
+
+/* List Controls */
+.list-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.view-toggle {
+  padding: 8px 12px;
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.view-toggle.active {
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+}
+
+/* Materials Grid */
+.materials-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+/* 격자형 뷰 */
+.materials-grid.grid-view {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+/* 격자형 뷰에서 카드 스타일 */
+.materials-grid.grid-view .material-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 15px;
+  min-height: 200px;
+}
+
+.materials-grid.grid-view .material-image {
+  margin-bottom: 10px;
+}
+
+.materials-grid.grid-view .material-image img {
+  width: 60px;
+  height: 60px;
+}
+
+.materials-grid.grid-view .material-info {
+  margin-bottom: 10px;
+}
+
+.materials-grid.grid-view .material-name {
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+.materials-grid.grid-view .material-description {
+  display: none; /* 격자형에서는 설명 숨김 */
+}
+
+.materials-grid.grid-view .material-tags {
+  display: none; /* 격자형에서는 태그 숨김 */
+}
+
+.materials-grid.grid-view .material-actions {
+  width: 100%;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.materials-grid.grid-view .btn-location,
+.materials-grid.grid-view .btn-cart {
+  font-size: 0.8rem;
+  padding: 6px 10px;
+}
+
+/* 리스트형 뷰 (기본) */
+.materials-grid:not(.grid-view) .material-card {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  min-height: 140px;
+}
+
+.materials-grid:not(.grid-view) .material-image {
+  margin-right: 20px;
+  margin-bottom: 0;
+}
+
+.materials-grid:not(.grid-view) .material-info {
+  flex: 1;
+  margin-bottom: 0;
+  margin-right: 20px;
+}
+
+.materials-grid:not(.grid-view) .material-actions {
+  flex-direction: row;
+  gap: 10px;
+  min-width: 200px;
+}
+
+/* Material Cards */
+.material-card {
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-height: 280px; /* 높이를 두 배로 증가 */
+}
+
+.material-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-color: var(--accent-color);
+}
+
+/* 리스트 뷰일 때 */
+.materials-grid:not(.grid-view) .material-card {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  min-height: 140px; /* 리스트 뷰도 높이 증가 */
+}
+
+.materials-grid:not(.grid-view) .material-image {
+  margin-right: 20px;
+  margin-bottom: 0;
+}
+
+.materials-grid:not(.grid-view) .material-info {
+  flex: 1;
+  margin-bottom: 0;
+  margin-right: 20px;
+}
+
+.materials-grid:not(.grid-view) .material-actions {
+  flex-direction: row;
+  gap: 10px;
+  min-width: 200px;
+}
+
+/* 그리드 뷰일 때 */
+.materials-grid.grid-view .material-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-height: 200px; /* 격자형은 조금 더 컴팩트하게 */
+  padding: 15px;
+}
+
+.material-image {
+  position: relative;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.material-image img {
+  width: 80px; /* 격자형에서는 이미지를 더 크게 */
+  height: 80px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.grade-badge {
+  position: absolute;
+  top: -5px;
+  right: 50%;
+  transform: translateX(50%);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  color: white;
+}
+
+.grade-badge.common {
+  background-color: #9e9e9e;
+}
+.grade-badge.uncommon {
+  background-color: #4caf50;
+}
+.grade-badge.rare {
+  background-color: #2196f3;
+}
+.grade-badge.epic {
+  background-color: #9c27b0;
+}
+.grade-badge.legendary {
+  background-color: #ff9800;
+}
+
+.material-info {
+  flex: 1;
+  margin-bottom: 15px;
+}
+
+.material-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.material-description {
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.material-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.tag {
+  background-color: var(--bg-tertiary);
+  color: var(--text-secondary);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  border: 1px solid var(--border-color);
+}
+
+.material-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.btn-location,
+.btn-cart {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.btn-location {
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+}
+
+.btn-location:hover {
+  background-color: var(--accent-hover);
+}
+
+.btn-cart {
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.btn-cart:hover {
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+}
+
+/* Cart Section */
+.cart-section {
+  position: sticky;
+  top: 80px;
+  margin-bottom: 30px;
+}
+
+.cart-container {
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cart-container h3 {
+  margin-bottom: 15px;
+  color: var(--accent-color);
+}
+
+.item-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.quantity-btn,
+.remove-btn {
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+.quantity-btn {
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.remove-btn {
+  background-color: var(--error-color);
+  color: white;
+}
+
+.btn-clear-cart,
+.btn-view-locations {
+  flex: 1;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-clear-cart {
+  background-color: var(--error-color);
+  color: white;
+}
+
+.btn-clear-cart:hover {
+  background-color: #d32f2f;
+  color: white;
+}
+
+.btn-view-locations {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.btn-view-locations:hover {
+  background-color: var(--accent-hover);
+  color: white;
+}
+
+.empty-cart {
+  text-align: center;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: var(--card-bg);
+  margin: 5% auto;
+  padding: 0;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  border: 1px solid var(--border-color);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.modal-header h3 {
+  margin: 0;
+  color: var(--accent-color);
+}
+
+.close {
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  color: var(--text-secondary);
+}
+
+.close:hover {
+  color: var(--accent-color);
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.material-detail {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.material-detail img {
+  width: 60px;
+  height: 60px;
+  margin-right: 15px;
+  border-radius: 8px;
+}
+
+.material-detail-info h4 {
+  margin: 0 0 8px 0;
+  color: var(--text-primary);
+}
+
+.locations-list h4 {
+  margin-bottom: 15px;
+  color: var(--accent-color);
+}
+
+.location-item {
+  background-color: var(--bg-tertiary);
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease;
+  border: 1px solid var(--border-color);
+}
+
+.location-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.location-header h5 {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.location-type {
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+}
+
+.location-details {
+  display: flex;
+  gap: 15px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* Toast Styles */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+  padding: 12px 20px;
+  border-radius: 6px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  z-index: 1001;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .main-nav {
+    display: none;
+  }
+
+  .mobile-menu-toggle {
+    display: block;
+  }
+
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .materials-list {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-links ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .rune-categories {
+    flex-direction: column;
+  }
+
+  .materials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-table {
+    font-size: 0.9rem;
+  }
+
+  .filter-label {
+    width: 80px;
+    padding: 10px;
+  }
+
+  .filter-buttons {
+    justify-content: flex-start;
+  }
+
+  .filter-btn {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    min-width: 60px;
+  }
+
+  .materials-grid:not(.grid-view) .material-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .materials-grid:not(.grid-view) .material-image {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+
+  .materials-grid:not(.grid-view) .material-info {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+
+  .materials-grid:not(.grid-view) .material-actions {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .cart-section {
+    position: static;
+  }
+
+  .modal-content {
+    width: 95%;
+    margin: 10% auto;
+  }
+
+  .location-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .location-details {
+    flex-direction: column;
+    gap: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .character-item {
+    flex-wrap: wrap;
+  }
+
+  .material-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .material-info {
+    margin-bottom: 10px;
+  }
+
+  .material-quantity,
+  .material-actions {
+    width: 100%;
+    justify-content: space-between;
+    margin: 5px 0;
+  }
+
+  .news-item {
+    flex-direction: column;
+  }
+
+  .news-date {
+    margin-bottom: 5px;
+  }
+
+  .filter-table {
+    display: block;
+  }
+
+  .filter-row {
+    display: block;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .filter-label {
+    display: block;
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .filter-options {
+    display: block;
+    width: 100%;
+  }
 }
