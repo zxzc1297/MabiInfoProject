@@ -2,277 +2,223 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{layout/default :: head('룬')}"></head>
 <body>
-    <div th:replace="~{layout/default :: layout(~{::section})}">
-        <section class="page-header">
-            <h1>룬 시스템</h1>
-            <p>게임 내 모든 룬과 효과를 확인하세요.</p>
-        </section>
+<div th:replace="~{layout/default :: layout(~{::section})}">
 
-        <section class="runes-overview">
-            <div class="section-header">
-                <h2>룬 시스템 개요</h2>
-            </div>
-            <div class="overview-content">
-                <p>
-                    룬은 캐릭터의 능력을 강화하는 특별한 아이템입니다. 장비에 장착하여 추가 효과를 얻을 수 있으며, 
-                    여러 룬을 조합하여 시너지 효과를 발휘할 수도 있습니다. 룬은 몬스터 처치, 던전 클리어, 특별 이벤트 등을 통해 획득할 수 있습니다.
-                </p>
-                <div class="rune-categories">
-                    <div class="rune-category">
-                        <h3>공격 룬</h3>
-                        <p>캐릭터의 공격력과 관련된 능력을 강화합니다.</p>
-                    </div>
-                    <div class="rune-category">
-                        <h3>방어 룬</h3>
-                        <p>캐릭터의 방어력과 생존력을 향상시킵니다.</p>
-                    </div>
-                    <div class="rune-category">
-                        <h3>유틸리티 룬</h3>
-                        <p>이동 속도, 쿨다운 감소 등 다양한 유틸리티 효과를 제공합니다.</p>
-                    </div>
-                    <div class="rune-category">
-                        <h3>특수 룬</h3>
-                        <p>독특한 효과를 가진 희귀한 룬입니다.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <section class="runes-list">
-            <div class="section-header">
-                <h2>룬 목록</h2>
-            </div>
-            <div class="runes-filters">
-                <div class="filter-group">
-                    <label for="category-filter">카테고리</label>
-                    <select id="category-filter">
-                        <option value="all">전체</option>
-                        <option value="attack">공격</option>
-                        <option value="defense">방어</option>
-                        <option value="utility">유틸리티</option>
-                        <option value="special">특수</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label for="rarity-filter">희귀도</label>
-                    <select id="rarity-filter">
-                        <option value="all">전체</option>
-                        <option value="common">일반</option>
-                        <option value="uncommon">고급</option>
-                        <option value="rare">희귀</option>
-                        <option value="epic">영웅</option>
-                        <option value="legendary">전설</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label for="level-filter">레벨</label>
-                    <select id="level-filter">
-                        <option value="all">전체</option>
-                        <option value="1-10">1-10</option>
-                        <option value="11-20">11-20</option>
-                        <option value="21-30">21-30</option>
-                        <option value="31-40">31-40</option>
-                        <option value="41-50">41-50</option>
-                    </select>
-                </div>
-                <button class="filter-reset">
-                    <i class="fas fa-sync-alt"></i> 초기화
-                </button>
-            </div>
+    <section class="page-header">
+        <h1>룬 정보</h1>
+        <p>마비노기 모바일의 룬 정보를 확인하세요</p>
+    </section>
 
-            <div class="runes-search">
-                <input type="text" placeholder="룬 검색" class="runes-search-input">
-                <button class="runes-search-button">
+    <!-- Main Content -->
+    <main>
+        <!-- Runes Section -->
+        <section class="runes-section">
+            <div class="runes-container">
+                <!-- Search and Filters -->
+                <div class="runes-controls">
+                    <div class="runes-search">
+                        <input type="text" placeholder="룬 이름으로 검색" class="runes-search-input" id="runeSearch">
+                        <button class="runes-search-button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    <div class="runes-filters">
+                        <select class="rune-category-filter" id="categoryFilter">
+                            <option value="">모든 카테고리</option>
+                            <option value="attack">공격 룬</option>
+                            <option value="defense">방어 룬</option>
+                            <option value="utility">유틸리티 룬</option>
+                            <option value="special">특수 룬</option>
+                        </select>
+                        <select class="rune-grade-filter" id="gradeFilter">
+                            <option value="">모든 등급</option>
+                            <option value="normal">일반</option>
+                            <option value="rare">희귀</option>
+                            <option value="epic">영웅</option>
+                            <option value="legendary">전설</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Runes List -->
+                <div class="runes-list" id="runesList">
+                    <!-- Attack Runes -->
+                    <div class="rune-item" data-category="attack" data-grade="epic">
+                        <div class="rune-info">
+                            <img src="https://via.placeholder.com/50/ff6600/ffffff?text=공격" alt="공격력 증가 룬" class="rune-image">
+                            <div class="rune-details">
+                                <div class="rune-name">공격력 증가</div>
+                                <div class="rune-category attack">공격 룬</div>
+                                <div class="rune-grade epic">영웅</div>
+                            </div>
+                        </div>
+                        <div class="rune-effect">
+                            <p>공격력이 15% 증가합니다.</p>
+                            <p>치명타 확률이 5% 증가합니다.</p>
+                        </div>
+                        <div class="rune-actions">
+                            <button class="view-details" data-rune="attack-boost">
+                                <i class="fas fa-info-circle"></i> 상세보기
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="rune-item" data-category="attack" data-grade="rare">
+                        <div class="rune-info">
+                            <img src="https://via.placeholder.com/50/ff3333/ffffff?text=치명" alt="치명타 룬" class="rune-image">
+                            <div class="rune-details">
+                                <div class="rune-name">치명타 강화</div>
+                                <div class="rune-category attack">공격 룬</div>
+                                <div class="rune-grade rare">희귀</div>
+                            </div>
+                        </div>
+                        <div class="rune-effect">
+                            <p>치명타 확률이 12% 증가합니다.</p>
+                            <p>치명타 피해가 25% 증가합니다.</p>
+                        </div>
+                        <div class="rune-actions">
+                            <button class="view-details" data-rune="critical-boost">
+                                <i class="fas fa-info-circle"></i> 상세보기
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Defense Runes -->
+                    <div class="rune-item" data-category="defense" data-grade="legendary">
+                        <div class="rune-info">
+                            <img src="https://via.placeholder.com/50/3366ff/ffffff?text=방어" alt="방어력 룬" class="rune-image">
+                            <div class="rune-details">
+                                <div class="rune-name">불굴의 방어</div>
+                                <div class="rune-category defense">방어 룬</div>
+                                <div class="rune-grade legendary">전설</div>
+                            </div>
+                        </div>
+                        <div class="rune-effect">
+                            <p>방어력이 20% 증가합니다.</p>
+                            <p>받는 피해가 10% 감소합니다.</p>
+                            <p>체력이 30% 증가합니다.</p>
+                        </div>
+                        <div class="rune-actions">
+                            <button class="view-details" data-rune="defense-boost">
+                                <i class="fas fa-info-circle"></i> 상세보기
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="rune-item" data-category="defense" data-grade="epic">
+                        <div class="rune-info">
+                            <img src="https://via.placeholder.com/50/33aa33/ffffff?text=회복" alt="생명력 회복 룬" class="rune-image">
+                            <div class="rune-details">
+                                <div class="rune-name">생명력 회복</div>
+                                <div class="rune-category defense">방어 룬</div>
+                                <div class="rune-grade epic">영웅</div>
+                            </div>
+                        </div>
+                        <div class="rune-effect">
+                            <p>매 초마다 최대 체력의 2% 회복합니다.</p>
+                            <p>치료 효과가 30% 증가합니다.</p>
+                        </div>
+                        <div class="rune-actions">
+                            <button class="view-details" data-rune="heal-boost">
+                                <i class="fas fa-info-circle"></i> 상세보기
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Utility Runes -->
+                    <div class="rune-item" data-category="utility" data-grade="rare">
+                        <div class="rune-info">
+                            <img src="https://via.placeholder.com/50/9933ff/ffffff?text=속도" alt="이동 속도 룬" class="rune-image">
+                            <div class="rune-details">
+                                <div class="rune-name">신속한 이동</div>
+                                <div class="rune-category utility">유틸리티 룬</div>
+                                <div class="rune-grade rare">희귀</div>
+                            </div>
+                        </div>
+                        <div class="rune-effect">
+                            <p>이동 속도가 25% 증가합니다.</p>
+                            <p>대시 쿨다운이 20% 감소합니다.</p>
+                        </div>
+                        <div class="rune-actions">
+                            <button class="view-details" data-rune="speed-boost">
+                                <i class="fas fa-info-circle"></i> 상세보기
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="rune-item" data-category="utility" data-grade="epic">
+                        <div class="rune-info">
+                            <img src="https://via.placeholder.com/50/ffaa00/ffffff?text=쿨감" alt="쿨다운 감소 룬" class="rune-image">
+                            <div class="rune-details">
+                                <div class="rune-name">스킬 숙련</div>
+                                <div class="rune-category utility">유틸리티 룬</div>
+                                <div class="rune-grade epic">영웅</div>
+                            </div>
+                        </div>
+                        <div class="rune-effect">
+                            <p>모든 스킬의 쿨다운이 15% 감소합니다.</p>
+                            <p>마나 소모량이 10% 감소합니다.</p>
+                        </div>
+                        <div class="rune-actions">
+                            <button class="view-details" data-rune="cooldown-reduction">
+                                <i class="fas fa-info-circle"></i> 상세보기
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Special Runes -->
+                    <div class="rune-item" data-category="special" data-grade="legendary">
+                        <div class="rune-info">
+                            <img src="https://via.placeholder.com/50/gold/black?text=특수" alt="특수 룬" class="rune-image">
+                            <div class="rune-details">
+                                <div class="rune-name">고대의 힘</div>
+                                <div class="rune-category special">특수 룬</div>
+                                <div class="rune-grade legendary">전설</div>
+                            </div>
+                        </div>
+                        <div class="rune-effect">
+                            <p>모든 능력치가 10% 증가합니다.</p>
+                            <p>경험치 획득량이 20% 증가합니다.</p>
+                            <p>특수 스킬 '고대의 분노' 사용 가능</p>
+                        </div>
+                        <div class="rune-actions">
+                            <button class="view-details" data-rune="ancient-power">
+                                <i class="fas fa-info-circle"></i> 상세보기
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="rune-item" data-category="utility" data-grade="normal">
+                        <div class="rune-info">
+                            <img src="https://via.placeholder.com/50/888888/ffffff?text=마나" alt="마나 룬" class="rune-image">
+                            <div class="rune-details">
+                                <div class="rune-name">마나 효율</div>
+                                <div class="rune-category utility">유틸리티 룬</div>
+                                <div class="rune-grade normal">일반</div>
+                            </div>
+                        </div>
+                        <div class="rune-effect">
+                            <p>최대 마나가 15% 증가합니다.</p>
+                            <p>마나 회복 속도가 20% 증가합니다.</p>
+                        </div>
+                        <div class="rune-actions">
+                            <button class="view-details" data-rune="mana-efficiency">
+                                <i class="fas fa-info-circle"></i> 상세보기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- No Results Message -->
+                <div class="no-results" id="noResults" style="display: none;">
                     <i class="fas fa-search"></i>
-                </button>
-            </div>
-
-            <div class="runes-grid">
-                <div class="rune-card">
-                    <div class="rune-card-header">
-                        <img src="https://via.placeholder.com/100" alt="Rune Image">
-                        <div class="rune-info">
-                            <h3>화염의 룬</h3>
-                            <span class="rune-rarity rare">희귀</span>
-                        </div>
-                    </div>
-                    <div class="rune-card-body">
-                        <p class="rune-description">
-                            화염 속성 공격력을 15% 증가시킵니다. 화염 속성 스킬 사용 시 10%의 확률로 적에게 3초간 화상 효과를 부여합니다.
-                        </p>
-                        <div class="rune-stats">
-                            <div class="stat">
-                                <span class="stat-label">카테고리:</span>
-                                <span class="stat-value">공격</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-label">레벨 제한:</span>
-                                <span class="stat-value">25</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-label">장착 슬롯:</span>
-                                <span class="stat-value">무기</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="rune-card-footer">
-                        <button class="view-details">
-                            <i class="fas fa-info-circle"></i> 상세 정보
-                        </button>
-                        <button class="view-locations">
-                            <i class="fas fa-map-marker-alt"></i> 획득처 확인
-                        </button>
-                    </div>
-                </div>
-
-                <div class="rune-card">
-                    <div class="rune-card-header">
-                        <img src="https://via.placeholder.com/100" alt="Rune Image">
-                        <div class="rune-info">
-                            <h3>방패의 룬</h3>
-                            <span class="rune-rarity epic">영웅</span>
-                        </div>
-                    </div>
-                    <div class="rune-card-body">
-                        <p class="rune-description">
-                            물리 방어력을 20% 증가시킵니다. 피해를 받을 때 15%의 확률로 3초간 방어력이 추가로 30% 증가합니다.
-                        </p>
-                        <div class="rune-stats">
-                            <div class="stat">
-                                <span class="stat-label">카테고리:</span>
-                                <span class="stat-value">방어</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-label">레벨 제한:</span>
-                                <span class="stat-value">30</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-label">장착 슬롯:</span>
-                                <span class="stat-value">방어구</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="rune-card-footer">
-                        <button class="view-details">
-                            <i class="fas fa-info-circle"></i> 상세 정보
-                        </button>
-                        <button class="view-locations">
-                            <i class="fas fa-map-marker-alt"></i> 획득처 확인
-                        </button>
-                    </div>
-                </div>
-
-                <div class="rune-card">
-                    <div class="rune-card-header">
-                        <img src="https://via.placeholder.com/100" alt="Rune Image">
-                        <div class="rune-info">
-                            <h3>신속의 룬</h3>
-                            <span class="rune-rarity uncommon">고급</span>
-                        </div>
-                    </div>
-                    <div class="rune-card-body">
-                        <p class="rune-description">
-                            이동 속도를 10% 증가시킵니다. 스킬 사용 후 2초간 이동 속도가 추가로 15% 증가합니다.
-                        </p>
-                        <div class="rune-stats">
-                            <div class="stat">
-                                <span class="stat-label">카테고리:</span>
-                                <span class="stat-value">유틸리티</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-label">레벨 제한:</span>
-                                <span class="stat-value">20</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-label">장착 슬롯:</span>
-                                <span class="stat-value">신발</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="rune-card-footer">
-                        <button class="view-details">
-                            <i class="fas fa-info-circle"></i> 상세 정보
-                        </button>
-                        <button class="view-locations">
-                            <i class="fas fa-map-marker-alt"></i> 획득처 확인
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pagination">
-                <button class="pagination-prev">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <div class="pagination-numbers">
-                    <button class="active">1</button>
-                    <button>2</button>
-                    <button>3</button>
-                    <button>4</button>
-                    <button>5</button>
-                </div>
-                <button class="pagination-next">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-        </section>
-
-        <section class="rune-combinations">
-            <div class="section-header">
-                <h2>룬 조합</h2>
-            </div>
-            <div class="combinations-content">
-                <p>
-                    특정 룬들을 함께 장착하면 추가 시너지 효과를 얻을 수 있습니다. 아래는 인기 있는 룬 조합들입니다.
-                </p>
-                <div class="combinations-list">
-                    <div class="combination-item">
-                        <h3>화염 마스터리</h3>
-                        <div class="combination-runes">
-                            <div class="combination-rune">
-                                <img src="https://via.placeholder.com/50" alt="Rune Image">
-                                <span>화염의 룬</span>
-                            </div>
-                            <div class="combination-rune">
-                                <img src="https://via.placeholder.com/50" alt="Rune Image">
-                                <span>폭발의 룬</span>
-                            </div>
-                            <div class="combination-rune">
-                                <img src="https://via.placeholder.com/50" alt="Rune Image">
-                                <span>마법 증폭의 룬</span>
-                            </div>
-                        </div>
-                        <div class="combination-effect">
-                            <h4>조합 효과</h4>
-                            <p>화염 속성 스킬의 치명타 확률이 15% 증가하고, 화상 효과의 지속 시간이 2초 연장됩니다.</p>
-                        </div>
-                    </div>
-                    <div class="combination-item">
-                        <h3>불멸의 수호자</h3>
-                        <div class="combination-runes">
-                            <div class="combination-rune">
-                                <img src="https://via.placeholder.com/50" alt="Rune Image">
-                                <span>방패의 룬</span>
-                            </div>
-                            <div class="combination-rune">
-                                <img src="https://via.placeholder.com/50" alt="Rune Image">
-                                <span>생명의 룬</span>
-                            </div>
-                            <div class="combination-rune">
-                                <img src="https://via.placeholder.com/50" alt="Rune Image">
-                                <span>회복의 룬</span>
-                            </div>
-                        </div>
-                        <div class="combination-effect">
-                            <h4>조합 효과</h4>
-                            <p>최대 체력이 10% 증가하고, 피해를 받을 때 5%의 확률로 받은 피해의 20%를 체력으로 회복합니다.</p>
-                        </div>
-                    </div>
+                    <h3>검색 결과가 없습니다</h3>
+                    <p>다른 검색어나 필터를 사용해보세요.</p>
                 </div>
             </div>
         </section>
-    </div>
-
-    <script th:src="@{/js/runes.js}"></script>
+    </main>
+</div>
 </body>
 </html>
