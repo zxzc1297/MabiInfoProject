@@ -20,6 +20,14 @@ public class MainController {
 
     private final CrawlerService crawlerService;
 
+    /**
+     * 메인 페이지
+     * @author lhs
+     * @param model
+     * @param request
+     * @return 메인 페이지
+     * @throws IOException
+     */
     @GetMapping("/")
     public String goMain(Model model, HttpServletRequest request) throws IOException{
         List<News> noticeList = crawlerService.getNewsList("notice");
@@ -31,18 +39,6 @@ public class MainController {
         model.addAttribute("updateList", updateList);
         model.addAttribute("currentPage", "main");
         return "index";
-    }
-
-    @GetMapping("/runes")
-    public String goRuneList(Model model, HttpServletRequest request){
-        model.addAttribute("currentPage", "runes");
-        return "runes";
-    }
-
-    @GetMapping("/materials")
-    public String goMaterialList(Model model, HttpServletRequest request){
-        model.addAttribute("currentPage", "materials");
-        return "materials";
     }
 
 }

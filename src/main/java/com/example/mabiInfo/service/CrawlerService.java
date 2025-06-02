@@ -16,6 +16,13 @@ import java.util.List;
 @Slf4j
 public class CrawlerService implements CrawlerServiceImpl{
 
+    /**
+     * 마비노기 메인 홈페이지 크롤링
+     * @author lhs
+     * @param type 공지사항, 업데이트, 에린노트
+     * @return 각 리스트
+     * @throws IOException
+     */
     public List<News> getNewsList(String type) throws IOException {
         String noticeUrl = "https://mabinogimobile.nexon.com/News/" + type;
         List<News> newsList = new ArrayList<>();
