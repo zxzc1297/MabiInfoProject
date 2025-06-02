@@ -1600,3 +1600,126 @@ body.light-theme .logo a {
     text-align: center;
   }
 }
+
+/* 로그인 페이지 스타일 250602 */
+.login-section {
+  padding: 40px 0;
+}
+
+.login-container {
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  padding: 30px;
+  max-width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.login-info {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.login-info h2 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: var(--text-primary);
+}
+
+.login-info p {
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.login-benefits {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.login-benefits li {
+  display: flex;
+  align-items: center;
+  color: var(--text-secondary);
+}
+
+.login-benefits i {
+  color: var(--accent-color);
+  margin-right: 10px;
+}
+
+.social-login {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.social-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 20px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-button i {
+  margin-right: 10px;
+  font-size: 1.2rem;
+}
+
+.social-button.kakao {
+  background-color: #fee500;
+  color: #3a1d1d;
+}
+
+.social-button.kakao:hover {
+  background-color: #f6dc00;
+  transform: translateY(-2px);
+}
+
+.social-button.discord {
+  background-color: #5865f2;
+  color: white;
+}
+
+.social-button.discord:hover {
+  background-color: #4752c4;
+  transform: translateY(-2px);
+}
+
+.login-notice {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+  border-top: 1px solid var(--border-color);
+  padding-top: 20px;
+}
+
+.login-notice a {
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+.login-notice a:hover {
+  text-decoration: underline;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .login-container {
+    padding: 20px;
+    margin: 0 15px;
+  }
+
+  .login-benefits {
+    grid-template-columns: 1fr;
+  }
+}

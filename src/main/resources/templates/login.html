@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/default :: head('로그인')}"></head>
+<body>
+<div th:replace="~{layout/default :: layout(~{::section})}">
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>로그인</h1>
+        <p>마비노기 모바일 정보 사이트에 오신 것을 환영합니다. 소셜 계정으로 간편하게 로그인하세요.</p>
+    </section>
+
+    <!-- Login Section -->
+    <section class="login-section">
+        <div class="login-container">
+            <div class="login-info">
+                <h2>소셜 계정으로 로그인</h2>
+                <p>소셜 계정으로 간편하게 로그인하고 다양한 기능을 이용해보세요.</p>
+            </div>
+
+            <div class="social-login">
+                <a href="#" th:href="@{/oauth2/authorization/kakao}" class="social-button kakao">
+                    <i class="fas fa-comment"></i> 카카오톡으로 로그인
+                </a>
+                <a href="#" th:href="@{/oauth2/authorization/discord}" class="social-button discord">
+                    <i class="fab fa-discord"></i> 디스코드로 로그인
+                </a>
+            </div>
+
+            <div class="login-notice">
+                <p>로그인하면 <a th:href="@{/terms}">이용약관</a>과 <a th:href="@{/privacy}">개인정보처리방침</a>에 동의하게 됩니다.</p>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>
