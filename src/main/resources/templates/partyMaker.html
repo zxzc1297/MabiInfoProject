@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/default :: head('파티 생성기')}"></head>
+<body>
+    <div th:replace="~{layout/default :: layout(~{::section})}">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>길드 파티 생성기</h1>
+            <p>길드원들의 캐릭터 정보를 입력하고 최적의 레이드 파티를 자동으로 구성해보세요.</p>
+        </div>
+
+        <!-- Party Generator Section -->
+        <section class="partyMaker-section">
+            <div class="generator-container">
+                <!-- Settings Panel -->
+                <div class="settings-panel">
+                    <h2>레이드 설정</h2>
+                    <div class="raid-settings">
+                        <div class="setting-group">
+                            <label for="raidType">레이드 유형</label>
+                            <select id="raidType" class="form-select">
+                                <option value="4">4인 레이드</option>
+                                <option value="8">8인 레이드</option>
+                            </select>
+                        </div>
+                        
+                        <div class="setting-group" id="healerSetting" style="display: none;">
+                            <label for="healerCount">힐러 수 (8인 레이드)</label>
+                            <select id="healerCount" class="form-select">
+                                <option value="2">최소 2명</option>
+                                <option value="1">최소 1명</option>
+                                <option value="0">0명</option>
+                            </select>
+                        </div>
+                        
+                        <div class="setting-group" id="combatPowerSetting">
+                            <label for="minCombatPower">최소 딜러 전투력 (선택사항)</label>
+                            <input type="number" id="minCombatPower" class="form-input" placeholder="예: 50000">
+                            <small>입력하지 않으면 평균 전투력 기준으로 계산됩니다.</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Character Input Panel -->
+                <div class="character-input-panel">
+                    <div class="member-header">
+                        <h2>길드원 캐릭터 입력</h2>
+                        <div class="button_wrap">
+                            <button type="button" class="add-character-btn" onclick="saveGuildData()">
+                                <i class="fas fa-plus"></i> 저장하기
+                            </button>
+                            <button type="button" class="add-character-btn" onclick="loadGuildData()">
+                                <i class="fas fa-plus"></i> 불러오기
+                            </button>
+                        </div>
+                    </div>
+                    <div class="guild-members" id="guildMembers">
+                        <!-- 길드원 1 -->
+                        <div class="member-card">
+                            <div class="member-header">
+                                <h3>길드원 1</h3>
+                                <button type="button" class="add-character-btn" onclick="addCharacter(this)">
+                                    <i class="fas fa-plus"></i> 캐릭터 추가
+                                </button>
+                            </div>
+                            <div class="characters-list">
+                                <!-- 캐릭터들이 여기에 추가됩니다 -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="button" class="add-member-btn" onclick="addMember()">
+                        <i class="fas fa-user-plus"></i> 길드원 추가
+                    </button>
+                </div>
+
+                <!-- Generate Button -->
+                <div class="generate-section">
+                    <button type="button" class="generate-btn" onclick="generateParties()">
+                        <i class="fas fa-magic"></i> 파티 생성하기
+                    </button>
+                </div>
+
+                <!-- Results Panel -->
+                <div class="results-panel" id="resultsPanel" style="display: none;">
+                    <h2>생성된 파티</h2>
+                    <div class="parties-container" id="partiesContainer">
+                        <!-- 생성된 파티들이 여기에 표시됩니다 -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

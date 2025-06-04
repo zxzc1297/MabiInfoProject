@@ -4,39 +4,41 @@
     <meta charset="UTF-8">
 </head>
 <body>
-    <!-- Header Fragment -->
-    <header th:fragment="header">
-        <div class="logo">
-            <a href="/">MABIMOBILE.INFO</a>
-        </div>
-        <nav class="main-nav">
-            <ul>
-                <li><a th:href="@{/materials}" th:classappend="${currentPage == 'materials'} ? 'active' : ''">제작 재료</a></li>
-                <li><a th:href="@{/runes}" th:classappend="${currentPage == 'runes'} ? 'active' : ''">룬</a></li>
-                <li><a th:href="@{/skills}" th:classappend="${currentPage == 'skills'} ? 'active' : ''">스킬</a></li>
-                <li><a th:href="@{/hunting}" th:classappend="${currentPage == 'hunting'} ? 'active' : ''">사냥터</a></li>
-                <li><a th:href="@{/exchange}" th:classappend="${currentPage == 'exchange'} ? 'active' : ''">물물교환</a></li>
-                <li><a th:href="@{/quests}" th:classappend="${currentPage == 'quests'} ? 'active' : ''">히든 퀘스트</a></li>
-            </ul>
-        </nav>
-        <div class="mobile-menu-toggle">
-            <i class="fas fa-bars"></i>
-        </div>
-        <div class="dark-light" title="테마 변경">
-            <i class="fas fa-moon"></i>
-        </div>
-    </header>
-
-    <!-- Mobile Navigation Fragment -->
-    <div th:fragment="mobile-nav" class="mobile-nav">
+<!-- Header Fragment -->
+<header th:fragment="header">
+    <div class="logo">
+        <a href="/">MABIMOBILE.INFO</a>
+    </div>
+    <nav class="main-nav">
         <ul>
             <li><a th:href="@{/materials}" th:classappend="${currentPage == 'materials'} ? 'active' : ''">제작 재료</a></li>
             <li><a th:href="@{/runes}" th:classappend="${currentPage == 'runes'} ? 'active' : ''">룬</a></li>
             <li><a th:href="@{/skills}" th:classappend="${currentPage == 'skills'} ? 'active' : ''">스킬</a></li>
             <li><a th:href="@{/hunting}" th:classappend="${currentPage == 'hunting'} ? 'active' : ''">사냥터</a></li>
+            <li><a th:href="@{/partyMaker}" th:classappend="${currentPage == 'partyMaker'} ? 'active' : ''">파티 생성기</a></li>
             <li><a th:href="@{/exchange}" th:classappend="${currentPage == 'exchange'} ? 'active' : ''">물물교환</a></li>
             <li><a th:href="@{/quests}" th:classappend="${currentPage == 'quests'} ? 'active' : ''">히든 퀘스트</a></li>
         </ul>
+    </nav>
+    <div class="mobile-menu-toggle">
+        <i class="fas fa-bars"></i>
     </div>
+    <div class="dark-light" title="테마 변경">
+        <i class="fas fa-moon"></i>
+    </div>
+</header>
+
+<!-- Mobile Navigation Fragment -->
+<div th:fragment="mobile-nav" class="mobile-nav">
+    <ul>
+        <li><a th:href="@{/materials}" th:classappend="${currentPage == 'materials'} ? 'active' : ''">제작 재료</a></li>
+        <li><a th:href="@{/runes}" th:classappend="${currentPage == 'runes'} ? 'active' : ''">룬</a></li>
+        <li><a th:href="@{/skills}" th:classappend="${currentPage == 'skills'} ? 'active' : ''">스킬</a></li>
+        <li><a th:href="@{/hunting}" th:classappend="${currentPage == 'hunting'} ? 'active' : ''">사냥터</a></li>
+        <li><a th:href="@{/partyMaker}" th:classappend="${currentPage == 'partyMaker'} ? 'active' : ''">파티 생성기</a></li>
+        <li><a th:href="@{/exchange}" th:classappend="${currentPage == 'exchange'} ? 'active' : ''">물물교환</a></li>
+        <li><a th:href="@{/quests}" th:classappend="${currentPage == 'quests'} ? 'active' : ''">히든 퀘스트</a></li>
+    </ul>
+</div>
 </body>
 </html>
