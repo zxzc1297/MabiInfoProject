@@ -41,10 +41,4 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping("/partyMaker")
-    public String goPartyMaker(Model model){
-        model.addAttribute("currentPage", "partyMaker");
-        return "partyMaker";
-    }
-
 }
