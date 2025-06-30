@@ -43,9 +43,12 @@ public class PartyMakerService implements PartyMakerServiceImpl{
 
         // JavaScript의 generate4ManParties_balanced 로직을 여기에 Java로 구현
         // (0) 최소 전투력 필터링
-        List<CharacterInfo> charactersForPartyBuilding = allCharacters.stream()
-                .filter(c -> c.getPower() >= minCombatPower)
-                .collect(Collectors.toList());
+        List<CharacterInfo> charactersForPartyBuilding = new ArrayList<>();
+        for (CharacterInfo c : allCharacters) {
+            if (c.getPower() >= minCombatPower) {
+                charactersForPartyBuilding.add(c);
+            }
+        }
 
         List<PartyShell> partyShells = new ArrayList<>();
         Set<String> usedCharacterNames = new HashSet<>(); // 사용된 캐릭터 이름 추적 (CharacterInfo.getName())
@@ -74,23 +77,37 @@ public class PartyMakerService implements PartyMakerServiceImpl{
         }
 
         if (charactersForPartyBuilding.isEmpty()) {
-            return partyShells.stream()
-                    .map(shell -> shell.getMembers().stream().map(CharacterInfo::toMap).collect(Collectors.toList()))
-                    .collect(Collectors.toList());
+            List<List<Map<String, Object>>> emptyParties = new ArrayList<>();
+            for (PartyShell shell : partyShells) {
+                List<Map<String, Object>> partyMembers = new ArrayList<>();
+                for (CharacterInfo member : shell.getMembers()) {
+                    partyMembers.add(member.toMap());
+                }
+                emptyParties.add(partyMembers);
+            }
+            return emptyParties;
         }
 
         // (2) 탱커 배분
-        List<CharacterInfo> availableTanks = charactersForPartyBuilding.stream()
-                .filter(c -> "탱커".equals(c.getRole()))
-                .sorted() // CharacterInfo에 compareTo 구현 (전투력 내림차순)
-                .collect(Collectors.toList());
+        List<CharacterInfo> availableTanks = new ArrayList<>();
+        for (CharacterInfo c : charactersForPartyBuilding) {
+            if ("탱커".equals(c.getRole())) {
+                availableTanks.add(c);
+            }
+        }
+        Collections.sort(availableTanks); // 전투력 내림차순 정렬
 
         for (CharacterInfo tank : availableTanks) {
             if (usedCharacterNames.contains(tank.getName())) continue;
             for (PartyShell shell : partyShells) {
-                if (shell.getMembers().size() < shell.getPartySize() &&
-                        shell.getMembers().stream().noneMatch(m -> "탱커".equals(m.getRole())) &&
-                        !shell.getOwnerIndexSet().contains(tank.getOwnerIndex())) {
+                boolean hasTank = false;
+                for (CharacterInfo member : shell.getMembers()) {
+                    if ("탱커".equals(member.getRole())) {
+                        hasTank = true;
+                        break;
+                    }
+                }
+                if (shell.getMembers().size() < shell.getPartySize() && !hasTank && !shell.getOwnerIndexSet().contains(tank.getOwnerIndex())) {
                     shell.addMember(tank);
                     usedCharacterNames.add(tank.getName());
                     break;
@@ -99,15 +116,30 @@ public class PartyMakerService implements PartyMakerServiceImpl{
         }
 
         // (3) 힐러 배분 (조건1: 탱커 없는 파티 우선)
-        List<CharacterInfo> availableHealers = charactersForPartyBuilding.stream()
-                .filter(c -> "힐러".equals(c.getRole()) && !usedCharacterNames.contains(c.getName()))
-                .sorted()
-                .collect(Collectors.toList());
+        List<CharacterInfo> availableHealers = new ArrayList<>();
+        for (CharacterInfo c : charactersForPartyBuilding) {
+            if ("힐러".equals(c.getRole()) && !usedCharacterNames.contains(c.getName())) {
+                availableHealers.add(c);
+            }
+        }
+        Collections.sort(availableHealers);
 
         // 힐러 배정을 위해 파티 우선순위 정렬
         partyShells.sort((ps1, ps2) -> {
-            boolean ps1HasTank = ps1.getMembers().stream().anyMatch(m -> "탱커".equals(m.getRole()));
-            boolean ps2HasTank = ps2.getMembers().stream().anyMatch(m -> "탱커".equals(m.getRole()));
+            boolean ps1HasTank = false;
+            for (CharacterInfo member : ps1.getMembers()) {
+                if ("탱커".equals(member.getRole())) {
+                    ps1HasTank = true;
+                    break;
+                }
+            }
+            boolean ps2HasTank = false;
+            for (CharacterInfo member : ps2.getMembers()) {
+                if ("탱커".equals(member.getRole())) {
+                    ps2HasTank = true;
+                    break;
+                }
+            }
             if (!ps1HasTank && ps2HasTank) return -1; // ps1 (탱커 없음) 우선
             if (ps1HasTank && !ps2HasTank) return 1;  // ps2 (탱커 없음) 우선
             return Integer.compare(ps1.getMembers().size(), ps2.getMembers().size()); // 멤버 수 적은 파티 우선
@@ -116,9 +148,14 @@ public class PartyMakerService implements PartyMakerServiceImpl{
         for (CharacterInfo healer : availableHealers) {
             if (usedCharacterNames.contains(healer.getName())) continue;
             for (PartyShell shell : partyShells) { // 정렬된 쉘 순서대로
-                if (shell.getMembers().size() < shell.getPartySize() &&
-                        shell.getMembers().stream().noneMatch(m -> "힐러".equals(m.getRole())) &&
-                        !shell.getOwnerIndexSet().contains(healer.getOwnerIndex())) {
+                boolean hasHealer = false;
+                for (CharacterInfo member : shell.getMembers()) {
+                    if ("힐러".equals(member.getRole())) {
+                        hasHealer = true;
+                        break;
+                    }
+                }
+                if (shell.getMembers().size() < shell.getPartySize() && !hasHealer && !shell.getOwnerIndexSet().contains(healer.getOwnerIndex())) {
                     shell.addMember(healer);
                     usedCharacterNames.add(healer.getName());
                     break;
@@ -128,18 +165,24 @@ public class PartyMakerService implements PartyMakerServiceImpl{
         // 힐러 배정 후 원래 순서로 돌리거나, 이후 딜러 배정 시 다시 정렬
 
         // (4) 딜러 배분 (통합된 로직: 약한 파티가 가장 강한 가용 딜러 선택)
-        List<CharacterInfo> availableDealers = charactersForPartyBuilding.stream()
-                .filter(c -> "딜러".equals(c.getRole()) && !usedCharacterNames.contains(c.getName()))
-                .sorted() // 전투력 내림차순
-                .collect(Collectors.toList());
+        List<CharacterInfo> availableDealers = new ArrayList<>();
+        for (CharacterInfo c : charactersForPartyBuilding) {
+            if ("딜러".equals(c.getRole()) && !usedCharacterNames.contains(c.getName())) {
+                availableDealers.add(c);
+            }
+        }
+        Collections.sort(availableDealers); // 전투력 내림차순
 
         boolean dealerPlacedInAnyPartyThisCycle = true;
         while (dealerPlacedInAnyPartyThisCycle && !availableDealers.isEmpty()) {
             dealerPlacedInAnyPartyThisCycle = false;
 
-            List<PartyShell> partiesNeedingDealers = partyShells.stream()
-                    .filter(s -> s.getMembers().size() < s.getPartySize())
-                    .collect(Collectors.toList());
+            List<PartyShell> partiesNeedingDealers = new ArrayList<>();
+            for (PartyShell s : partyShells) {
+                if (s.getMembers().size() < s.getPartySize()) {
+                    partiesNeedingDealers.add(s);
+                }
+            }
 
             if (partiesNeedingDealers.isEmpty()) break;
 
@@ -159,8 +202,12 @@ public class PartyMakerService implements PartyMakerServiceImpl{
                         boolean canAddDealer = true;
                         // 조건2: 4번째 멤버로 추가 시 전체 원거리 파티 방지
                         if (targetParty.getMembers().size() == 3) {
-                            long currentMeleeCount = targetParty.getMembers().stream()
-                                    .filter(m -> "근접".equals(CLASS_DATA.get(m.getJob()).getType())).count();
+                            long currentMeleeCount = 0;
+                            for (CharacterInfo m : targetParty.getMembers()) {
+                                if ("근접".equals(CLASS_DATA.get(m.getJob()).getType())) {
+                                    currentMeleeCount++;
+                                }
+                            }
                             if (currentMeleeCount == 0 && "원거리".equals(CLASS_DATA.get(dealer.getJob()).getType())) {
                                 canAddDealer = false;
                             }
@@ -224,9 +271,12 @@ public class PartyMakerService implements PartyMakerServiceImpl{
         }
 
         // JavaScript의 generate8ManParties_advanced 로직을 여기에 Java로 구현
-        List<CharacterInfo> charactersForPartyBuilding = allCharacters.stream()
-                .filter(c -> c.getPower() >= minCombatPower)
-                .collect(Collectors.toList());
+        List<CharacterInfo> charactersForPartyBuilding = new ArrayList<>();
+        for (CharacterInfo c : allCharacters) {
+            if (c.getPower() >= minCombatPower) {
+                charactersForPartyBuilding.add(c);
+            }
+        }
 
         List<PartyShell> partyShells = new ArrayList<>();
         Set<String> usedCharacterNames = new HashSet<>();
@@ -252,24 +302,41 @@ public class PartyMakerService implements PartyMakerServiceImpl{
         }
 
         if (charactersForPartyBuilding.isEmpty()) {
-            return partyShells.stream()
-                    .map(shell -> shell.getMembers().stream().map(CharacterInfo::toMap).collect(Collectors.toList()))
-                    .collect(Collectors.toList());
+            List<List<Map<String, Object>>> emptyParties = new ArrayList<>();
+            for (PartyShell shell : partyShells) {
+                List<Map<String, Object>> partyMembers = new ArrayList<>();
+                for (CharacterInfo member : shell.getMembers()) {
+                    partyMembers.add(member.toMap());
+                }
+                emptyParties.add(partyMembers);
+            }
+            return emptyParties;
         }
 
         // 역할별 사용 가능한 캐릭터 목록 (초기화)
-        List<CharacterInfo> availableHealers = charactersForPartyBuilding.stream()
-                .filter(c -> "힐러".equals(c.getRole()))
-                .sorted()
-                .collect(Collectors.toList());
-        List<CharacterInfo> availableTanks = charactersForPartyBuilding.stream()
-                .filter(c -> "탱커".equals(c.getRole()))
-                .sorted()
-                .collect(Collectors.toList());
-        List<CharacterInfo> availableDealers = charactersForPartyBuilding.stream()
-                .filter(c -> "딜러".equals(c.getRole()))
-                .sorted()
-                .collect(Collectors.toList());
+        List<CharacterInfo> availableHealers = new ArrayList<>();
+        for (CharacterInfo c : charactersForPartyBuilding) {
+            if ("힐러".equals(c.getRole())) {
+                availableHealers.add(c);
+            }
+        }
+        Collections.sort(availableHealers);
+
+        List<CharacterInfo> availableTanks = new ArrayList<>();
+        for (CharacterInfo c : charactersForPartyBuilding) {
+            if ("탱커".equals(c.getRole())) {
+                availableTanks.add(c);
+            }
+        }
+        Collections.sort(availableTanks);
+
+        List<CharacterInfo> availableDealers = new ArrayList<>();
+        for (CharacterInfo c : charactersForPartyBuilding) {
+            if ("딜러".equals(c.getRole())) {
+                availableDealers.add(c);
+            }
+        }
+        Collections.sort(availableDealers);
 
         // (8인) 1. 목표 힐러 수 기반 힐러 배분
         for (int round = 0; round < healerCountPerParty; round++) {
@@ -327,9 +394,12 @@ public class PartyMakerService implements PartyMakerServiceImpl{
         boolean placedDealerInAnyPartyThisCycle = true;
         while(placedDealerInAnyPartyThisCycle && !availableDealers.isEmpty()) {
             placedDealerInAnyPartyThisCycle = false;
-            List<PartyShell> partiesNeedingDealers = partyShells.stream()
-                    .filter(s -> s.getMembers().size() < s.getPartySize())
-                    .collect(Collectors.toList());
+            List<PartyShell> partiesNeedingDealers = new ArrayList<>();
+            for (PartyShell s : partyShells) {
+                if (s.getMembers().size() < s.getPartySize()) {
+                    partiesNeedingDealers.add(s);
+                }
+            }
 
             if(partiesNeedingDealers.isEmpty()) break;
 
@@ -356,7 +426,11 @@ public class PartyMakerService implements PartyMakerServiceImpl{
         // (5) 최종 파티 목록 변환
         List<List<Map<String, Object>>> resultParties = new ArrayList<>();
         for (PartyShell shell : partyShells) {
-            resultParties.add(shell.getMembers().stream().map(CharacterInfo::toMap).collect(Collectors.toList()));
+            List<Map<String, Object>> partyMembers = new ArrayList<>();
+            for (CharacterInfo member : shell.getMembers()) {
+                partyMembers.add(member.toMap());
+            }
+            resultParties.add(partyMembers);
         }
         return resultParties;
     }
