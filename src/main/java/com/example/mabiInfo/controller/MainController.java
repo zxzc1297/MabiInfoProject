@@ -41,4 +41,16 @@ public class MainController {
         return "index";
     }
 
+    /**
+     * Skills 페이지
+     * @author lhs
+     * @param model
+     * @return Skills 페이지
+     */
+    @GetMapping("/skills")
+    public String goSkills(Model model) {
+        model.addAttribute("currentPage", "skills");
+        return "skills";
+    }
+
 }

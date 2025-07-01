@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/default :: head('스킬')}"></head>
+<body>
+<div th:replace="~{layout/default :: layout(~{::section})}">
+
+    <section class="page-header">
+        <div class="container">
+            <h1>직업별 스킬 정보</h1>
+            <p>각 직업의 주요 스킬과 특징을 확인해보세요.</p>
+        </div>
+    </section>
+
+    <main>
+        <section class="container">
+            <div class="materials-container"> <!-- Reusing a common container style -->
+                <h2 class="section-header">직업 목록</h2>
+                <div class="job-list">
+                    <!-- Job Cards will be dynamically generated or hardcoded here -->
+                    <div class="job-card">
+                        <h3 class="job-name">전사</h3>
+                        <p class="job-role">주 역할: 딜러</p>
+                        <p class="job-type">공격 타입: 근접</p>
+                        <button class="view-skills-btn" data-job="warrior">스킬 보기</button>
+                    </div>
+                    <div class="job-card">
+                        <h3 class="job-name">궁수</h3>
+                        <p class="job-role">주 역할: 딜러</p>
+                        <p class="job-type">공격 타입: 원거리</p>
+                        <button class="view-skills-btn" data-job="archer">스킬 보기</button>
+                    </div>
+                    <div class="job-card">
+                        <h3 class="job-name">마법사</h3>
+                        <p class="job-role">주 역할: 딜러</p>
+                        <p class="job-type">공격 타입: 원거리</p>
+                        <button class="view-skills-btn" data-job="mage">스킬 보기</button>
+                    </div>
+                    <div class="job-card">
+                        <h3 class="job-name">힐러</h3>
+                        <p class="job-role">주 역할: 힐러</p>
+                        <p class="job-type">공격 타입: 원거리</p>
+                        <button class="view-skills-btn" data-job="healer">스킬 보기</button>
+                    </div>
+                    <div class="job-card">
+                        <h3 class="job-name">기사</h3>
+                        <p class="job-role">주 역할: 탱커</p>
+                        <p class="job-type">공격 타입: 근접</p>
+                        <button class="view-skills-btn" data-job="knight">스킬 보기</button>
+                    </div>
+                    <div class="job-card">
+                        <h3 class="job-name">음유시인</h3>
+                        <p class="job-role">주 역할: 서포터</p>
+                        <p class="job-type">공격 타입: 원거리</p>
+                        <button class="view-skills-btn" data-job="bard">스킬 보기</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Modal or Section (initially hidden) -->
+        <section class="container" id="skills-detail-section" style="display: none;">
+            <div class="materials-container">
+                <h2 class="section-header" id="skills-detail-title"></h2>
+                <div id="skills-detail-content">
+                    <!-- Skills will be loaded here -->
+                    <p>선택된 직업의 스킬 정보가 여기에 표시됩니다.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+<style>
+    .job-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+    }
+    .job-card {
+        background-color: var(--bg-tertiary);
+        border-radius: 8px;
+        padding: 20px;
+        border-left: 4px solid var(--accent-color);
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .job-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    .job-name {
+        font-size: 1.5rem;
+        color: var(--accent-color);
+        margin-bottom: 10px;
+    }
+    .job-role, .job-type {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+    }
+    .view-skills-btn {
+        background-color: var(--accent-color);
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        margin-top: 15px;
+        transition: background-color 0.3s ease;
+    }
+    .view-skills-btn:hover {
+        background-color: var(--accent-hover);
+    }
+</style>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const viewSkillsButtons = document.querySelectorAll('.view-skills-btn');
+        const skillsDetailSection = document.getElementById('skills-detail-section');
+        const skillsDetailTitle = document.getElementById('skills-detail-title');
+        const skillsDetailContent = document.getElementById('skills-detail-content');
+
+        viewSkillsButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const job = this.dataset.job;
+                skillsDetailTitle.textContent = `${job} 스킬 정보`;
+                skillsDetailContent.innerHTML = `<p><strong>${job}</strong> 직업의 스킬 정보가 여기에 로드됩니다. (현재는 예시)</p>`;
+                skillsDetailSection.style.display = 'block';
+                skillsDetailSection.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    });
+</script>
+</body>
+</html>
