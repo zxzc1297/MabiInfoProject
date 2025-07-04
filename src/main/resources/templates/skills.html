@@ -13,45 +13,67 @@
 
     <main>
         <section class="container">
-            <div class="materials-container"> <!-- Reusing a common container style -->
-                <h2 class="section-header">직업 목록</h2>
-                <div class="job-list">
-                    <!-- Job Cards will be dynamically generated or hardcoded here -->
-                    <div class="job-card">
-                        <h3 class="job-name">전사</h3>
-                        <p class="job-role">주 역할: 딜러</p>
-                        <p class="job-type">공격 타입: 근접</p>
-                        <button class="view-skills-btn" data-job="warrior">스킬 보기</button>
+            <div class="materials-container">
+                <h2 class="section-header">전직 계열 및 직업</h2>
+                <div class="job-tab-container">
+                    <div class="job-tab-buttons">
+                        <button class="tab-btn active" data-tab="family-warrior">전사</button>
+                        <button class="tab-btn" data-tab="family-mage">마법사</button>
+                        <button class="tab-btn" data-tab="family-archer">궁수</button>
+                        <button class="tab-btn" data-tab="family-thief">도적</button>
+                        <button class="tab-btn" data-tab="family-healer">힐러</button>
+                        <button class="tab-btn" data-tab="family-bard">음유시인</button>
                     </div>
-                    <div class="job-card">
-                        <h3 class="job-name">궁수</h3>
-                        <p class="job-role">주 역할: 딜러</p>
-                        <p class="job-type">공격 타입: 원거리</p>
-                        <button class="view-skills-btn" data-job="archer">스킬 보기</button>
-                    </div>
-                    <div class="job-card">
-                        <h3 class="job-name">마법사</h3>
-                        <p class="job-role">주 역할: 딜러</p>
-                        <p class="job-type">공격 타입: 원거리</p>
-                        <button class="view-skills-btn" data-job="mage">스킬 보기</button>
-                    </div>
-                    <div class="job-card">
-                        <h3 class="job-name">힐러</h3>
-                        <p class="job-role">주 역할: 힐러</p>
-                        <p class="job-type">공격 타입: 원거리</p>
-                        <button class="view-skills-btn" data-job="healer">스킬 보기</button>
-                    </div>
-                    <div class="job-card">
-                        <h3 class="job-name">기사</h3>
-                        <p class="job-role">주 역할: 탱커</p>
-                        <p class="job-type">공격 타입: 근접</p>
-                        <button class="view-skills-btn" data-job="knight">스킬 보기</button>
-                    </div>
-                    <div class="job-card">
-                        <h3 class="job-name">음유시인</h3>
-                        <p class="job-role">주 역할: 서포터</p>
-                        <p class="job-type">공격 타입: 원거리</p>
-                        <button class="view-skills-btn" data-job="bard">스킬 보기</button>
+                    <div class="job-tab-content">
+                        <!-- 전사 -->
+                        <div class="tab-panel active" id="family-warrior">
+                            <ul class="job-sublist">
+                                <li><button class="view-skills-btn" data-job="전사">전사</button></li>
+                                <li><button class="view-skills-btn" data-job="대검전사">대검전사</button></li>
+                                <li><button class="view-skills-btn" data-job="검술사">검술사</button></li>
+                            </ul>
+                        </div>
+                        <!-- 마법사 -->
+                        <div class="tab-panel" id="family-mage">
+                            <ul class="job-sublist">
+                                <li><button class="view-skills-btn" data-job="마법사">마법사</button></li>
+                                <li><button class="view-skills-btn" data-job="전격술사">전격술사</button></li>
+                                <li><button class="view-skills-btn" data-job="빙결술사">빙결술사</button></li>
+                                <li><button class="view-skills-btn" data-job="화염술사">화염술사</button></li>
+                            </ul>
+                        </div>
+                        <!-- 궁수 -->
+                        <div class="tab-panel" id="family-archer">
+                            <ul class="job-sublist">
+                                <li><button class="view-skills-btn" data-job="궁수">궁수</button></li>
+                                <li><button class="view-skills-btn" data-job="장궁병">장궁병</button></li>
+                                <li><button class="view-skills-btn" data-job="석궁사수">석궁사수</button></li>
+                            </ul>
+                        </div>
+                        <!-- 도적 -->
+                        <div class="tab-panel" id="family-thief">
+                            <ul class="job-sublist">
+                                <li><button class="view-skills-btn" data-job="도적">도적</button></li>
+                                <li><button class="view-skills-btn" data-job="격투가">격투가</button></li>
+                                <li><button class="view-skills-btn" data-job="듀얼블레이드">듀얼블레이드</button></li>
+                            </ul>
+                        </div>
+                        <!-- 힐러 -->
+                        <div class="tab-panel" id="family-healer">
+                            <ul class="job-sublist">
+                                <li><button class="view-skills-btn" data-job="힐러">힐러</button></li>
+                                <li><button class="view-skills-btn" data-job="수도사">수도사</button></li>
+                                <li><button class="view-skills-btn" data-job="사제">사제</button></li>
+                            </ul>
+                        </div>
+                        <!-- 음유시인 -->
+                        <div class="tab-panel" id="family-bard">
+                            <ul class="job-sublist">
+                                <li><button class="view-skills-btn" data-job="음유시인">음유시인</button></li>
+                                <li><button class="view-skills-btn" data-job="악사">악사</button></li>
+                                <li><button class="view-skills-btn" data-job="댄서">댄서</button></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -117,15 +139,33 @@
 </style>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabPanels = document.querySelectorAll('.tab-panel');
         const viewSkillsButtons = document.querySelectorAll('.view-skills-btn');
         const skillsDetailSection = document.getElementById('skills-detail-section');
         const skillsDetailTitle = document.getElementById('skills-detail-title');
         const skillsDetailContent = document.getElementById('skills-detail-content');
 
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Deactivate all buttons and panels
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabPanels.forEach(panel => panel.classList.remove('active'));
+
+                // Activate the clicked button and corresponding panel
+                button.classList.add('active');
+                const targetPanelId = button.getAttribute('data-tab');
+                document.getElementById(targetPanelId).classList.add('active');
+            });
+        });
+
         viewSkillsButtons.forEach(button => {
             button.addEventListener('click', function() {
                 const job = this.dataset.job;
-                skillsDetailTitle.textContent = `${job} 스킬 정보`;
+                const activeTab = document.querySelector('.tab-btn.active');
+                const jobFamily = activeTab ? activeTab.textContent : '';
+
+                skillsDetailTitle.textContent = `${jobFamily} - ${job} 스킬 정보`;
                 skillsDetailContent.innerHTML = `<p><strong>${job}</strong> 직업의 스킬 정보가 여기에 로드됩니다. (현재는 예시)</p>`;
                 skillsDetailSection.style.display = 'block';
                 skillsDetailSection.scrollIntoView({ behavior: 'smooth' });
