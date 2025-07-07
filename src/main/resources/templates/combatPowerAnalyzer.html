@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
+<head>
+    <title>환산 전투력 분석</title>
+</head>
+<th:block layout:fragment="content">
+    <div class="container my-5">
+        <h1 class="text-center mb-4">환산 전투력 분석기</h1>
+        <div class="card p-4">
+            <form id="combat-power-form">
+                <!-- A: 공격력 -->
+                <fieldset class="mb-4">
+                    <legend>A: 공격력</legend>
+                    <div class="row">
+                        <div class="col-md-4 mb-3"><label for="characterAttack" class="form-label">캐릭터 공격력</label><input type="number" class="form-control" id="characterAttack" value="0"></div>
+                        <div class="col-md-4 mb-3"><label for="weaponAttack" class="form-label">무기 공격력</label><input type="number" class="form-control" id="weaponAttack" value="0"></div>
+                        <div class="col-md-4 mb-3"><label for="emblemPercent" class="form-label">엠블럼 (%)</label><input type="number" class="form-control" id="emblemPercent" value="0"></div>
+                        <div class="col-md-4 mb-3"><label for="statBonusAttack" class="form-label">스탯 보너스 공격력</label><input type="number" class="form-control" id="statBonusAttack" value="0"></div>
+                        <div class="col-md-4 mb-3"><label for="petAttack" class="form-label">펫 공격력</label><input type="number" class="form-control" id="petAttack" value="0"></div>
+                    </div>
+                </fieldset>
+
+                <!-- B: 공증 -->
+                <fieldset class="mb-4">
+                    <legend>B: 공증 (%)</legend>
+                    <div class="row">
+                        <div class="col-md-4 mb-3"><label for="itemAttackIncreasePercent" class="form-label">템 공증</label><input type="number" class="form-control" id="itemAttackIncreasePercent" value="0"></div>
+                        <div class="col-md-4 mb-3"><label for="skillAttackIncreasePercent" class="form-label">스킬 공증</label><input type="number" class="form-control" id="skillAttackIncreasePercent" value="0"></div>
+                        <div class="col-md-4 mb-3"><label for="solidAttackIncreasePercent" class="form-label">굳건 공증</label><input type="number" class="form-control" id="solidAttackIncreasePercent" value="0"></div>
+                    </div>
+                </fieldset>
+
+                <!-- C: 피증 -->
+                <fieldset class="mb-4">
+                    <legend>C: 피증</legend>
+                    <div class="row">
+                        <div class="col-md-4 mb-3"><label for="skillPower" class="form-label">스킬 위력</label><input type="number" class="form-control" id="skillPower" value="0"></div>
+                        <div class="col-md-4 mb-3"><label for="itemDamageIncreasePercent" class="form-label">템 주피증 (%)</label><input type="number" class="form-control" id="itemDamageIncreasePercent" value="0"></div>
+                        <div class="col-md-4 mb-3"><label for="receivedDamageIncreasePercent" class="form-label">템 받피증 (%)</label><input type="number" class="form-control" id="receivedDamageIncreasePercent" value="0"></div>
+                        <div class="col-md-4 mb-3"><label for="synergyPercent" class="form-label">시너지 (%)</label><input type="number" class="form-control" id="synergyPercent" value="0"></div>
+                        <div class="col-md-4 mb-3"><label for="helioPercent" class="form-label">헬리오 (%)</label><input type="number" class="form-control" id="helioPercent" value="0"></div>
+                        <div class="col-md-4 mb-3"><label for="partialSkillDamagePercent" class="form-label">일부 스킬 댐증 (%)</label><input type="number" class="form-control" id="partialSkillDamagePercent" value="0"></div>
+                    </div>
+                </fieldset>
+
+                <!-- D: 강화류 -->
+                <fieldset class="mb-4">
+                    <legend>D: 강화류</legend>
+                    <div class="row">
+                        <div class="col-md-3 mb-3"><label for="multiHitStat" class="form-label">연타 스탯</label><input type="number" class="form-control" id="multiHitStat" value="0"></div>
+                        <div class="col-md-3 mb-3"><label for="strongHitStat" class="form-label">강타 스탯</label><input type="number" class="form-control" id="strongHitStat" value="0"></div>
+                        <div class="col-md-3 mb-3"><label for="multiHitDamagePercent" class="form-label">연타 댐증 (%)</label><input type="number" class="form-control" id="multiHitDamagePercent" value="0"></div>
+                        <div class="col-md-3 mb-3"><label for="strongHitDamagePercent" class="form-label">강타 댐증 (%)</label><input type="number" class="form-control" id="strongHitDamagePercent" value="0"></div>
+                    </div>
+                </fieldset>
+
+                <!-- E: 보석 -->
+                <fieldset class="mb-4">
+                    <legend>E: 보석 (%)</legend>
+                    <div class="row">
+                        <div class="col-md-12 mb-3"><label for="gemTagDamagePercent" class="form-label">보석 태그 댐증</label><input type="number" class="form-control" id="gemTagDamagePercent" value="0"></div>
+                    </div>
+                </fieldset>
+
+                <!-- F: 치명타 -->
+                <fieldset class="mb-4">
+                    <legend>F: 치명타</legend>
+                    <div class="row">
+                        <div class="col-md-4 mb-3"><label for="criticalHitStat" class="form-label">치명타 스탯</label><input type="number" class="form-control" id="criticalHitStat" value="0"></div>
+                        <div class="col-md-4 mb-3"><label for="bossResistancePercent" class="form-label">보스 저항 (%)</label><input type="number" class="form-control" id="bossResistancePercent" value="0"></div>
+                        <div class="col-md-4 mb-3"><label for="torchPercent" class="form-label">횃불 (%)</label><input type="number" class="form-control" id="torchPercent" value="0"></div>
+                        <div class="col-md-4 mb-3"><label for="brilliantPercent" class="form-label">현란_크확 (%)</label><input type="number" class="form-control" id="brilliantPercent" value="0"></div>
+                        <div class="col-md-4 mb-3"><label for="charCritIncreasePercent" class="form-label">캐릭 크확증 (%)</label><input type="number" class="form-control" id="charCritIncreasePercent" value="0"></div>
+                        <div class="col-md-4 mb-3"><label for="brilliantRatePercent" class="form-label">현란_크댐 (%)</label><input type="number" class="form-control" id="brilliantRatePercent" value="0"></div>
+                        <div class="col-md-4 mb-3"><label for="charCritDamagePercent" class="form-label">캐릭 크댐증 (%)</label><input type="number" class="form-control" id="charCritDamagePercent" value="0"></div>
+                    </div>
+                </fieldset>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">계산하기</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="result-container" class="mt-5" style="display: none;">
+            <h2 class="text-center">환산 전투력 결과</h2>
+            <div class="alert alert-success text-center fs-4" role="alert">
+                <strong><span id="combat-power-result"></span></strong>
+            </div>
+        </div>
+    </div>
+    <script src="/js/combatPowerAnalyzer.js"></script>
+</th:block>
+</html>
